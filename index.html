@@ -101,115 +101,105 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
   </div>
 </div>
 
-<!-- ══ 报告（SBTI风格） ══ -->
+<!-- ══ 报告 ══ -->
 <div class="screen hidden" id="s-report"
-     style="overflow-y:auto;justify-content:flex-start;padding:14px 12px 28px;
-            background:#EEE8FF">
+     style="overflow-y:auto;justify-content:flex-start;padding:0;background:#EEE8FF">
 
-  <!-- ① HERO 卡：大标题 + 角色图 -->
-  <div style="background:#fff;border-radius:20px;padding:22px 16px 16px;
-       margin-bottom:10px;box-shadow:0 2px 14px rgba(100,60,200,.12);
-       text-align:center;width:100%">
-    <div style="font-size:.6rem;color:#A090C0;letter-spacing:2px;margin-bottom:10px">
-      你的精神状态类型：
-    </div>
-    <!-- 称号（最大，最重要） -->
-    <div id="rpt-rank"
-         style="font-size:1.45rem;font-weight:900;color:#2A1A4A;
-                line-height:1.25;margin-bottom:8px;padding:0 6px">
-      【称号】
-    </div>
-    <!-- 类型码徽章 -->
-    <div id="rpt-tag"
-         style="display:inline-block;font-size:.85rem;font-weight:900;
-                letter-spacing:5px;padding:5px 18px;border-radius:30px;
-                margin-bottom:16px;color:#fff;background:#888">
-      USAGI
-    </div>
-    <!-- 角色大图 -->
-    <div style="position:relative;display:inline-block;margin-bottom:12px">
-      <img id="rpt-card-img" width="150" height="150"
-           style="border-radius:20px;object-fit:cover;display:block;
-                  box-shadow:0 6px 24px rgba(0,0,0,.15)">
-      <!-- 稀有度角标 -->
-      <div id="rpt-rarity-badge"
-           style="position:absolute;top:-10px;right:-10px;
-                  font-size:.75rem;font-weight:900;letter-spacing:2px;
-                  padding:4px 12px;border-radius:20px;color:#fff">SSR</div>
-    </div>
-    <!-- tagline -->
-    <div id="rpt-tagline" style="font-size:.76rem;color:#8080A8;font-style:italic">
-      你的精神状态，已被本系统精准捕获
-    </div>
-  </div>
+  <!-- 顶部警示条 -->
+  <div class="stripe" style="border-radius:0;flex-shrink:0"></div>
 
-  <!-- ② 指标 pill 卡 -->
-  <div style="background:#fff;border-radius:16px;padding:14px 16px;
-       margin-bottom:10px;box-shadow:0 2px 14px rgba(100,60,200,.12);width:100%">
-    <!-- 稀有度+耗时+怒气 pill -->
-    <div id="rpt-pill"
-         style="display:inline-flex;align-items:center;gap:8px;
-                border-radius:30px;padding:7px 14px;margin-bottom:10px;
-                font-size:.76rem;font-weight:800">
-      <span id="rpt-rarity-text" style="letter-spacing:1px">SR</span>
-      <span style="opacity:.35">·</span>
-      <span>耗时 <span id="rpt-time">-.-</span>s</span>
-      <span style="opacity:.35">·</span>
-      <span>怒气 <span id="rpt-rage-pill">---</span>%</span>
-    </div>
-    <!-- 评语 -->
-    <div id="rpt-comment"
-         style="font-size:.8rem;color:#4A3868;line-height:1.75">...</div>
-  </div>
+  <!-- 内容区 -->
+  <div style="padding:14px 12px 0;display:flex;flex-direction:column;gap:10px;width:100%">
 
-  <!-- ③ 数据卡 -->
-  <div style="background:#fff;border-radius:16px;padding:14px 16px;
-       margin-bottom:10px;box-shadow:0 2px 14px rgba(100,60,200,.12);width:100%">
-    <div style="font-size:.58rem;color:#A090B8;font-weight:800;letter-spacing:2px;margin-bottom:10px">
-      本次制裁档案
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">净化值</span>
-      <div class="stat-track"><div class="stat-fill" id="rpt-purity-bar" style="width:100%"></div></div>
-      <span class="stat-val" id="rpt-purity-val">99.9%</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">消耗便便</span>
-      <div class="stat-track"><div class="stat-fill" style="width:100%"></div></div>
-      <span class="stat-val">15 枚</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">怒气值</span>
-      <div class="stat-track"><div class="stat-fill" id="rpt-rage-bar" style="width:50%"></div></div>
-      <span class="stat-val"><span id="rpt-rage-val">---</span>%</span>
-    </div>
-  </div>
-
-  <!-- ④ 金句卡 -->
-  <div style="background:#fff;border-radius:16px;padding:14px 16px;
-       margin-bottom:14px;box-shadow:0 2px 14px rgba(100,60,200,.12);width:100%">
-    <div style="font-size:.58rem;color:#A090B8;font-weight:800;letter-spacing:2px;margin-bottom:8px">
-      今日份净化金句
-    </div>
-    <div id="rpt-quote" style="font-size:.8rem;color:#5A3868;line-height:1.75;font-style:italic"></div>
-  </div>
-
-  <!-- ⑤ 警示条 + 按钮 -->
-  <div style="width:100%;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(100,60,200,.12)">
-    <div class="stripe"></div>
-    <div style="background:#fff;padding:10px 12px 14px">
-      <div style="text-align:center;font-size:.62rem;color:#B0A0C8;margin-bottom:10px">
-        📸 截图发给朋友，测测 ta 的职场战斗力
+    <!-- ① HERO 卡 -->
+    <div style="background:#fff;border-radius:20px;padding:20px 16px 16px;
+         box-shadow:0 2px 14px rgba(100,60,200,.12);text-align:center">
+      <div style="font-size:.6rem;color:#A090C0;letter-spacing:2px;margin-bottom:10px">
+        你的精神状态类型：
       </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-plain" onclick="restart()">🔄 再来一次</button>
-        <button class="btn-pink" onclick="shareRpt()">分享报告 📤</button>
+      <div id="rpt-rank"
+           style="font-size:1.45rem;font-weight:900;color:#2A1A4A;
+                  line-height:1.25;margin-bottom:8px;padding:0 6px">【称号】</div>
+      <div id="rpt-tag"
+           style="display:inline-block;font-size:.85rem;font-weight:900;
+                  letter-spacing:5px;padding:5px 18px;border-radius:30px;
+                  margin-bottom:14px;color:#fff;background:#888">USAGI</div>
+      <div style="position:relative;display:inline-block;margin-bottom:10px">
+        <img id="rpt-card-img" width="150" height="150"
+             style="border-radius:20px;object-fit:cover;display:block;
+                    box-shadow:0 6px 24px rgba(0,0,0,.15)">
+        <div id="rpt-rarity-badge"
+             style="position:absolute;top:-10px;right:-10px;font-size:.75rem;
+                    font-weight:900;letter-spacing:2px;padding:4px 12px;
+                    border-radius:20px;color:#fff">SSR</div>
+      </div>
+      <div id="rpt-tagline" style="font-size:.75rem;color:#8080A8;font-style:italic">
+        你的精神状态，已被本系统精准捕获
       </div>
     </div>
-    <div class="stripe"></div>
+
+    <!-- ② 按钮（卡面正下方） -->
+    <div style="display:flex;gap:8px">
+      <button class="btn-plain" onclick="restart()">🔄 再来一次</button>
+      <button class="btn-pink" onclick="shareRpt()">分享报告 📤</button>
+    </div>
+
+    <!-- ③ 指标 pill + 评语 -->
+    <div style="background:#fff;border-radius:16px;padding:14px 16px;
+         box-shadow:0 2px 14px rgba(100,60,200,.12)">
+      <div id="rpt-pill"
+           style="display:inline-flex;align-items:center;gap:8px;
+                  border-radius:30px;padding:7px 14px;margin-bottom:10px;
+                  font-size:.76rem;font-weight:800">
+        <span id="rpt-rarity-text">SR</span>
+        <span style="opacity:.3">·</span>
+        <span>耗时 <span id="rpt-time">-.-</span>s</span>
+        <span style="opacity:.3">·</span>
+        <span>怒气 <span id="rpt-rage-pill">---</span>%</span>
+      </div>
+      <div id="rpt-comment" style="font-size:.8rem;color:#4A3868;line-height:1.75">...</div>
+    </div>
+
+    <!-- ④ 数据条 -->
+    <div style="background:#fff;border-radius:16px;padding:14px 16px;
+         box-shadow:0 2px 14px rgba(100,60,200,.12)">
+      <div style="font-size:.58rem;color:#A090B8;font-weight:800;letter-spacing:2px;margin-bottom:10px">本次制裁档案</div>
+      <div class="stat-row">
+        <span class="stat-key">净化值</span>
+        <div class="stat-track"><div class="stat-fill" id="rpt-purity-bar" style="width:100%"></div></div>
+        <span class="stat-val" id="rpt-purity-val">99.9%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">消耗便便</span>
+        <div class="stat-track"><div class="stat-fill" style="width:100%"></div></div>
+        <span class="stat-val">15 枚</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">怒气值</span>
+        <div class="stat-track"><div class="stat-fill" id="rpt-rage-bar" style="width:50%"></div></div>
+        <span class="stat-val"><span id="rpt-rage-val">---</span>%</span>
+      </div>
+    </div>
+
+    <!-- ⑤ 金句 -->
+    <div style="background:#fff;border-radius:16px;padding:14px 16px;
+         box-shadow:0 2px 14px rgba(100,60,200,.12)">
+      <div style="font-size:.58rem;color:#A090B8;font-weight:800;letter-spacing:2px;margin-bottom:8px">今日份净化金句</div>
+      <div id="rpt-quote" style="font-size:.8rem;color:#5A3868;line-height:1.75;font-style:italic"></div>
+    </div>
+
+    <!-- 底部分享提示 -->
+    <div style="text-align:center;font-size:.62rem;color:#A090C0;padding:4px 0 10px">
+      📸 截图发给朋友，测测 ta 的职场战斗力
+    </div>
+
   </div>
+
+  <!-- 底部警示条 -->
+  <div class="stripe" style="border-radius:0;flex-shrink:0;margin-top:auto"></div>
 
 </div>
+
 
 <script>
 // ═══ 资源 ═══
@@ -266,7 +256,7 @@ const MAX=15;
 
 document.getElementById('file-inp').addEventListener('change',e=>{
   const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();r.onload=ev=>{imgData=ev.target.result;detectAvatar(()=>startGame());};r.readAsDataURL(f);
+  const r=new FileReader();r.onload=ev=>{imgData=ev.target.result;startGame();};r.readAsDataURL(f);
 });
 const uz=document.getElementById('up-zone');
 uz.addEventListener('dragover',e=>{e.preventDefault();uz.style.background='#FFE8F0';});
@@ -274,38 +264,19 @@ uz.addEventListener('dragleave',()=>uz.style.background='');
 uz.addEventListener('drop',e=>{
   e.preventDefault();uz.style.background='';
   const f=e.dataTransfer.files[0];if(!f)return;
-  const r=new FileReader();r.onload=ev=>{imgData=ev.target.result;detectAvatar(()=>startGame());};r.readAsDataURL(f);
+  const r=new FileReader();r.onload=ev=>{imgData=ev.target.result;startGame();};r.readAsDataURL(f);
 });
 
-function detectAvatar(cb){
-  const img=new Image();
-  img.onload=()=>{
-    const W=img.width,H=img.height,oc=document.createElement('canvas');
-    oc.width=W;oc.height=H;const ctx=oc.getContext('2d');ctx.drawImage(img,0,0);
-    const av=Math.round(Math.min(W*.14,H*.12));
-    let best={x:Math.round(W*.02),y:Math.round(H*.08)},sc=-1;
-    [.01,.04,.08].forEach(px=>[.06,.11,.17,.23,.3].forEach(py=>{
-      const x=Math.round(W*px),y=Math.round(H*py);
-      if(x+av>W||y+av>H)return;
-      const d=ctx.getImageData(x,y,av,av).data,n=av*av;
-      let sr=0,sg=0,sb=0;
-      for(let i=0;i<d.length;i+=4){sr+=d[i];sg+=d[i+1];sb+=d[i+2];}
-      const ar=sr/n,ag=sg/n,ab=sb/n;
-      if(ar>240&&ag>240&&ab>240)return;if(ar<25&&ag<25&&ab<25)return;
-      let v=0;for(let i=0;i<d.length;i+=4)v+=(d[i]-ar)**2+(d[i+1]-ag)**2+(d[i+2]-ab)**2;
-      v/=n*3;if(v>sc){sc=v;best={x,y};}
-    }));
-    const r2=av,res=document.createElement('canvas');res.width=res.height=r2*2;
-    const rc=res.getContext('2d');
-    rc.beginPath();rc.arc(r2,r2,r2,0,Math.PI*2);rc.clip();
-    rc.drawImage(oc,best.x,best.y,av,av,0,0,r2*2,r2*2);
-    avatarOC=res;cb();
-  };img.src=imgData;
+// 不检测头像，直接用完整截图
+let colleagueImg = null;
+function loadScreenshot() {
+  colleagueImg = new Image();
+  colleagueImg.src = imgData;
 }
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
 
 // ═══ 游戏 ═══
-let canvas,ctx,W,H,UX,UY,UW,TX,TY,TR;
+let canvas,ctx,W,H,UX,UY,UW,TX,TY,TW,TH;
 let phase='intro',tick=0,punchT=0,punchHit=false;
 let canClick=false,poopVisible=false,gameDone=false;
 let projectiles=[],particles=[],fxTexts=[],colShake=0,charProg=0;
@@ -320,13 +291,13 @@ function updateMeter(){
     poopCount===0?'点击便便开始制裁！':poopCount<MAX?`再来 ${MAX-poopCount} 坨！💪`:'引爆中 💥';
 }
 function startGame(){
-  poopCount=0;clickTs=[];gameDone=false;charProg=0;updateMeter();
+  poopCount=0;clickTs=[];gameDone=false;charProg=0;colleagueImg=null;loadScreenshot();updateMeter();
   show('s-game');
   canvas=document.getElementById('gc');ctx=canvas.getContext('2d');
   const r=document.querySelector('.stage').getBoundingClientRect();
   W=canvas.width=r.width;H=canvas.height=r.height;
   UW=Math.min(W*.28,130);UX=W*.2;UY=H*.48;
-  TR=Math.min(W*.16,68);TX=W*.73;TY=H*.42;
+  TW=Math.min(W*.38,165);TH=TW*1.1;TX=W*.73;TY=H*.44; // 截图卡片中心
   phase='intro';tick=0;punchT=0;punchHit=false;canClick=false;poopVisible=false;
   projectiles=[];particles=[];fxTexts=[];colShake=0;
   const nc=canvas.cloneNode(true);canvas.parentNode.replaceChild(nc,canvas);
@@ -401,7 +372,7 @@ function update(){
 function drawUsagi(){
   let src,dx=0;
   if(phase==='punch'){
-    src=OC.punch;const cy=punchT%55,lunge=(TX-UX)*.5;
+    src=OC.punch;const cy=punchT%55,lunge=(TX-UX)*.82;
     if(cy<22)dx=cy/22*lunge;else if(cy<38)dx=(1-(cy-22)/16)*lunge;
   }else if(phase==='squat'){src=OC.toilet;}
   else if(phase==='explode'){src=OC.crazy;}
@@ -411,23 +382,37 @@ function drawUsagi(){
   ctx.drawImage(src,UX-dw/2+dx,UY-dh/2,dw,dh);
 }
 function drawTarget(){
-  const r=TR,sk=Math.round(colShake*(Math.random()>.5?1:-1));
-  ctx.save();ctx.translate(TX+sk,TY+Math.round(colShake*(Math.random()>.5?.3:-.3)));
-  ctx.shadowColor=charProg>0?`rgba(255,${Math.floor(100-charProg*80)},0,.7)`:'rgba(200,130,180,.3)';
-  ctx.shadowBlur=10+charProg*20;
-  ctx.beginPath();ctx.arc(0,0,r+5,0,Math.PI*2);
-  ctx.fillStyle=charProg>.2?`rgb(${Math.floor(80+charProg*50)},${Math.floor(30-charProg*25)},0)`:'#fff';
-  ctx.fill();ctx.shadowBlur=0;
-  ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.clip();
-  if(avatarOC){ctx.drawImage(avatarOC,-r,-r,r*2,r*2);}
-  else{ctx.fillStyle='#eee';ctx.fillRect(-r,-r,r*2,r*2);ctx.font=`${r}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('😤',0,0);}
-  if(charProg>0){
-    ctx.globalAlpha=Math.min(charProg*1.1,.9);ctx.fillStyle='#1a0500';ctx.fillRect(-r,-r,r*2,r*2);
-    if(charProg<.7){ctx.globalAlpha=(1-charProg/.7)*.5;
-      const g=ctx.createRadialGradient(0,0,0,0,0,r*1.1);
-      g.addColorStop(0,'rgba(255,120,0,.8)');g.addColorStop(1,'rgba(200,0,0,0)');
-      ctx.fillStyle=g;ctx.fillRect(-r*1.2,-r*1.2,r*2.4,r*2.4);}
+  const hw=TW/2, hh=TH/2, r=12;
+  const sk=Math.round(colShake*(Math.random()>.5?1:-1));
+  const sky=Math.round(colShake*(Math.random()>.5?.4:-.4));
+  ctx.save(); ctx.translate(TX+sk, TY+sky);
+  // 卡片阴影 + 白边
+  ctx.shadowColor=charProg>0?`rgba(255,${Math.floor(80-charProg*60)},0,.7)`:'rgba(180,100,160,.25)';
+  ctx.shadowBlur=12+charProg*20;
+  ctx.fillStyle=charProg>.3?`rgb(${Math.floor(60+charProg*60)},${Math.floor(20-charProg*15)},0)`:'#fff';
+  // 白边圆角矩形
+  ctx.beginPath();ctx.roundRect(-hw-5,-hh-5,TW+10,TH+10,r+4);ctx.fill();
+  ctx.shadowBlur=0;
+  // 截图内容
+  ctx.save();
+  ctx.beginPath();ctx.roundRect(-hw,-hh,TW,TH,r);ctx.clip();
+  if(colleagueImg&&colleagueImg.complete&&colleagueImg.naturalWidth){
+    ctx.drawImage(colleagueImg,-hw,-hh,TW,TH);
+  } else {
+    ctx.fillStyle='#f0e8f8';ctx.fillRect(-hw,-hh,TW,TH);
+    ctx.font='32px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('😤',0,0);
   }
+  // 炸糊效果
+  if(charProg>0){
+    ctx.globalAlpha=Math.min(charProg*1.1,.9);ctx.fillStyle='#1a0500';ctx.fillRect(-hw,-hh,TW,TH);
+    if(charProg<.7){
+      ctx.globalAlpha=(1-charProg/.7)*.55;
+      const g=ctx.createRadialGradient(0,0,0,0,0,Math.max(TW,TH)*.7);
+      g.addColorStop(0,'rgba(255,120,0,.9)');g.addColorStop(1,'rgba(200,0,0,0)');
+      ctx.fillStyle=g;ctx.fillRect(-hw*1.3,-hh*1.3,TW*1.6,TH*1.6);
+    }
+  }
+  ctx.restore();
   ctx.restore();
 }
 function draw(){
@@ -438,19 +423,19 @@ function draw(){
   if(poopVisible&&OC.poop){
     const bx=W*.48,by=H*.56+Math.sin(tick*.12)*7,rot=Math.sin(tick*.08)*.14;
     ctx.save();ctx.translate(bx,by);ctx.rotate(rot);
-    const pw=65,ph=OC.poop.height/OC.poop.width*65;
+    const pw=98,ph=OC.poop.height/OC.poop.width*98;
     ctx.drawImage(OC.poop,-pw/2,-ph/2,pw,ph);ctx.restore();
     ctx.save();ctx.strokeStyle=`rgba(232,120,154,${.4+Math.sin(tick*.08)*.3})`;
     ctx.lineWidth=2;ctx.setLineDash([5,4]);
-    ctx.beginPath();ctx.arc(bx,by,60,0,Math.PI*2);ctx.stroke();ctx.restore();
+    ctx.beginPath();ctx.arc(bx,by,72,0,Math.PI*2);ctx.stroke();ctx.restore();
     if(tick%18<9){ctx.save();ctx.font='bold 12px PingFang SC,sans-serif';
-      ctx.textAlign='center';ctx.fillStyle='#E8789A';ctx.fillText('👆 点我！',bx,by+72);ctx.restore();}
+      ctx.textAlign='center';ctx.fillStyle='#E8789A';ctx.fillText('👆 点我！',bx,by+88);ctx.restore();}
   }
   projectiles.forEach(p=>{
     if(p.done)return;
     const tt=Math.min(p.t,1),px=bz(p.sx,p.cpX,p.tx,tt),py=bz(p.sy,p.cpY,p.ty,tt);
     ctx.save();ctx.translate(px,py);ctx.rotate(p.rot);
-    if(OC.poop){const s=36,ph2=OC.poop.height/OC.poop.width*s;ctx.drawImage(OC.poop,-s/2,-ph2/2,s,ph2);}
+    if(OC.poop){const s=48,ph2=OC.poop.height/OC.poop.width*s;ctx.drawImage(OC.poop,-s/2,-ph2/2,s,ph2);}
     ctx.restore();
   });
   particles.forEach(p=>{
