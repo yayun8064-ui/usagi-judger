@@ -25,13 +25,14 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
   width:min(320px,92vw);box-shadow:5px 5px 0 #C8A0B8;display:flex;
   flex-direction:column;align-items:center;gap:12px}
 #up-canvas{animation:wobble 1.8s ease-in-out infinite}
+@keyframes zenFloat{0%,100%{transform:translateY(0) rotate(-.5deg)}50%{transform:translateY(-10px) rotate(.5deg)}}
 @keyframes wobble{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(4deg) translateY(-8px)}}
 .up-bubble{background:#FFF3B0;border:2px solid #C8A0B8;border-radius:12px;
   padding:7px 14px;font-size:.78rem;font-weight:800;color:#4A3848;
   box-shadow:2px 2px 0 #C8A0B8;transform:rotate(-1deg);text-align:center}
 .up-zone{width:100%;border:2.5px dashed #E8789A;border-radius:14px;padding:16px;
   text-align:center;cursor:pointer;background:#FFF8FA;position:relative;transition:all .18s}
-.up-zone:hover{background:#FFE8F0;transform:scale(1.02)}
+.up-zone:hover{background:#F5EEFF;transform:scale(1.02)}
 .up-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 /* 游戏屏 */
 #s-game{padding:0;background:#FFF5FA}
@@ -70,20 +71,37 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
 <div id="flash" style="background:#fff"></div>
 
 <!-- ══ 上传 ══ -->
-<div class="screen" id="s-upload">
-  <div style="font-size:1.35rem;font-weight:900;color:#4A3848;text-align:center;line-height:1.3;margin-bottom:4px">💩 乌萨奇伪人制裁系统</div>
-  <div style="font-size:.7rem;color:#A090B0;margin-bottom:14px">净化怒气 · 功德无量</div>
-  <div class="up-card">
-    <canvas id="up-canvas" width="96" height="110"></canvas>
-    <div class="up-bubble">检测到伪人能量！上传证据启动制裁 💢</div>
-    <div class="up-zone" id="up-zone">
-      <input type="file" id="file-inp" accept="image/*">
-      <div style="font-size:1.8rem">📱</div>
-      <div style="font-size:.88rem;font-weight:800;color:#4A3848;margin-top:4px">上传聊天截图</div>
-      <div style="font-size:.68rem;color:#B0909A;margin-top:3px">自动识别头像 · 拖拽也行</div>
-    </div>
+<div class="screen" id="s-upload" style="background:linear-gradient(160deg,#F0EEFF,#FFF0F8)">
+
+  <!-- 打坐乌萨奇（首页 icon）-->
+  <img id="home-usagi" width="160" height="160"
+       style="object-fit:cover;border-radius:50%;margin-bottom:18px;
+              box-shadow:0 8px 32px rgba(150,100,200,.2);
+              animation:zenFloat 4s ease-in-out infinite">
+
+  <!-- slogan：看起来很佛，实际很暴 -->
+  <div style="font-size:1.6rem;font-weight:900;color:#4A3848;letter-spacing:2px;margin-bottom:6px">
+    善哉善哉，功德无量。💩
   </div>
+  <div style="font-size:.8rem;color:#9A80B8;margin-bottom:28px;font-style:italic">
+    
+  </div>
+
+  <!-- 上传区 -->
+  <div class="up-zone" id="up-zone"
+       style="width:min(280px,88vw);background:#fff;border-radius:20px;
+              border:2.5px dashed #C8A0E8;padding:20px 16px;text-align:center;
+              cursor:pointer;position:relative;transition:all .18s;
+              box-shadow:0 4px 16px rgba(150,100,200,.12)">
+    <input type="file" id="file-inp" accept="image/*"
+           style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+    <div style="font-size:1.8rem;margin-bottom:6px">📱</div>
+    <div style="font-size:.95rem;font-weight:800;color:#4A3848">上传伪人头像</div>
+    <div style="font-size:.68rem;color:#B0909A;margin-top:4px">建议正脸照，效果更佳 😈</div>
+  </div>
+
 </div>
+
 
 <!-- ══ 游戏 ══ -->
 <div class="screen hidden" id="s-game">
@@ -106,12 +124,12 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
      style="overflow-y:auto;justify-content:flex-start;padding:0;background:#EEE8FF">
 
   <!-- 顶部警示条 -->
-  <div class="stripe" style="border-radius:0;flex-shrink:0"></div>
+  <div class="stripe"></div>
 
   <!-- 内容区 -->
   <div style="padding:14px 12px 0;display:flex;flex-direction:column;gap:10px;width:100%">
 
-    <!-- ① HERO 卡 -->
+    <!-- ① HERO 卡：称号 + 角色图 + 金句 -->
     <div style="background:#fff;border-radius:20px;padding:20px 16px 16px;
          box-shadow:0 2px 14px rgba(100,60,200,.12);text-align:center">
       <div style="font-size:.6rem;color:#A090C0;letter-spacing:2px;margin-bottom:10px">
@@ -124,7 +142,8 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
            style="display:inline-block;font-size:.85rem;font-weight:900;
                   letter-spacing:5px;padding:5px 18px;border-radius:30px;
                   margin-bottom:14px;color:#fff;background:#888">USAGI</div>
-      <div style="position:relative;display:inline-block;margin-bottom:10px">
+      <!-- 角色图 + 稀有度 -->
+      <div style="position:relative;display:inline-block;margin-bottom:14px">
         <img id="rpt-card-img" width="150" height="150"
              style="border-radius:20px;object-fit:cover;display:block;
                     box-shadow:0 6px 24px rgba(0,0,0,.15)">
@@ -133,18 +152,19 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
                     font-weight:900;letter-spacing:2px;padding:4px 12px;
                     border-radius:20px;color:#fff">SSR</div>
       </div>
-      <div id="rpt-tagline" style="font-size:.75rem;color:#8080A8;font-style:italic">
+      <!-- 金句（乌萨奇图正下方） -->
+      <div id="rpt-quote"
+           style="font-size:.85rem;font-weight:700;color:#5A3868;line-height:1.7;
+                  padding:10px 12px;background:#F5F0FF;border-radius:12px;
+                  border-left:3px solid #C8A0E8;text-align:left"></div>
+      <!-- tagline -->
+      <div id="rpt-tagline"
+           style="font-size:.72rem;color:#A090C0;font-style:italic;margin-top:10px">
         你的精神状态，已被本系统精准捕获
       </div>
     </div>
 
-    <!-- ② 按钮（卡面正下方） -->
-    <div style="display:flex;gap:8px">
-      <button class="btn-plain" onclick="restart()">🔄 再来一次</button>
-      <button class="btn-pink" onclick="shareRpt()">分享报告 📤</button>
-    </div>
-
-    <!-- ③ 指标 pill + 评语 -->
+    <!-- ② 指标 pill + 评语 -->
     <div style="background:#fff;border-radius:16px;padding:14px 16px;
          box-shadow:0 2px 14px rgba(100,60,200,.12)">
       <div id="rpt-pill"
@@ -181,11 +201,10 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
       </div>
     </div>
 
-    <!-- ⑤ 金句 -->
-    <div style="background:#fff;border-radius:16px;padding:14px 16px;
-         box-shadow:0 2px 14px rgba(100,60,200,.12)">
-      <div style="font-size:.58rem;color:#A090B8;font-weight:800;letter-spacing:2px;margin-bottom:8px">今日份净化金句</div>
-      <div id="rpt-quote" style="font-size:.8rem;color:#5A3868;line-height:1.75;font-style:italic"></div>
+    <!-- 按钮 -->
+    <div style="display:flex;gap:8px">
+      <button class="btn-plain" onclick="restart()">🔄 再来一次</button>
+      <button class="btn-pink" onclick="shareRpt()">分享报告 📤</button>
     </div>
 
     <!-- 底部分享提示 -->
@@ -196,7 +215,7 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;height:100vh;overflo
   </div>
 
   <!-- 底部警示条 -->
-  <div class="stripe" style="border-radius:0;flex-shrink:0;margin-top:auto"></div>
+  <div class="stripe"></div>
 
 </div>
 
@@ -245,6 +264,9 @@ function onReady(){
   if(IMG.toilet)OC.toilet=rmWhite(IMG.toilet,220);
   if(IMG.midfinger)OC.midfinger=rmWhite(IMG.midfinger,230);
   if(IMG.poop)OC.poop=rmWhite(IMG.poop,230);
+  // 首页打坐乌萨奇
+  const hu=document.getElementById('home-usagi');
+  if(hu&&IMG.card_ur3)hu.src=IMG.card_ur3.src;
   const uc=document.getElementById('up-canvas');
   if(uc&&OC.worker){const s=uc.getContext('2d'),sc=Math.min(96/OC.worker.width,110/OC.worker.height)*.9;
     s.drawImage(OC.worker,(96-OC.worker.width*sc)/2,(110-OC.worker.height*sc)/2,OC.worker.width*sc,OC.worker.height*sc);}
@@ -276,7 +298,7 @@ function loadScreenshot() {
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
 
 // ═══ 游戏 ═══
-let canvas,ctx,W,H,UX,UY,UW,TX,TY,TW,TH;
+let canvas,ctx,W,H,UX,UY,UW,TX,TY,TR;
 let phase='intro',tick=0,punchT=0,punchHit=false;
 let canClick=false,poopVisible=false,gameDone=false;
 let projectiles=[],particles=[],fxTexts=[],colShake=0,charProg=0;
@@ -297,8 +319,8 @@ function startGame(){
   const r=document.querySelector('.stage').getBoundingClientRect();
   W=canvas.width=r.width;H=canvas.height=r.height;
   UW=Math.min(W*.28,130);UX=W*.2;UY=H*.48;
-  TW=Math.min(W*.38,165);TH=TW*1.1;TX=W*.73;TY=H*.44; // 截图卡片中心
-  phase='intro';tick=0;punchT=0;punchHit=false;canClick=false;poopVisible=false;
+  TR=Math.min(W*.22,95);TX=W*.73;TY=H*.44; // 圆形头像
+  phase='squat';tick=0;canClick=false;poopVisible=false;
   projectiles=[];particles=[];fxTexts=[];colShake=0;
   const nc=canvas.cloneNode(true);canvas.parentNode.replaceChild(nc,canvas);
   canvas=nc;ctx=canvas.getContext('2d');
@@ -341,18 +363,9 @@ function explode(){
 }
 function loop(){tick++;update();draw();if(!gameDone)window._raf=requestAnimationFrame(loop);}
 function update(){
-  if(phase==='intro'){if(tick>65){phase='punch';tick=0;punchT=0;punchHit=false;}}
-  else if(phase==='punch'){
-    punchT++;
-    if(punchT%55===20&&!punchHit){punchHit=true;colShake=14;
-      fxTexts.push({x:TX+(Math.random()-.5)*40,y:TY-40+Math.random()*20,t:0,dur:35,
-        text:['BAM！','POW！','哈！','KO！'][Math.floor(Math.random()*4)],col:'#E8789A',sz:34,bold:true});}
-    if(punchT%55===0)punchHit=false;
-    if(punchT>=165){phase='squat';tick=0;}
-  }
-  else if(phase==='squat'){
-    if(tick===45)fxTexts.push({x:UX,y:UY-UW*.7,t:0,dur:60,text:'使出秘密武器！',col:'#E8789A',sz:14});
-    if(tick>90){phase='game';tick=0;canClick=true;poopVisible=true;}
+  if(phase==='squat'){
+    if(tick===1)fxTexts.push({x:UX,y:UY-UW*.8,t:0,dur:70,text:'开始制裁！💩',col:'#E8789A',sz:16});
+    if(tick>50){phase='game';tick=0;canClick=true;poopVisible=true;}
   }
   else if(phase==='explode'){
     charProg=Math.min(tick/60,1);colShake*=.8;
@@ -370,50 +383,50 @@ function update(){
   fxTexts.forEach(f=>f.t++);fxTexts=fxTexts.filter(f=>f.t<f.dur);
 }
 function drawUsagi(){
-  let src,dx=0;
-  if(phase==='punch'){
-    src=OC.punch;const cy=punchT%55,lunge=(TX-UX)*.82;
-    if(cy<22)dx=cy/22*lunge;else if(cy<38)dx=(1-(cy-22)/16)*lunge;
-  }else if(phase==='squat'){src=OC.toilet;}
+  let src;
+  if(phase==='squat'||phase==='game'){src=OC.toilet;}
   else if(phase==='explode'){src=OC.crazy;}
   else{src=OC.worker;}
+  const dx=0;
   if(!src)return;
   const sc=UW/src.width,dw=src.width*sc,dh=src.height*sc;
   ctx.drawImage(src,UX-dw/2+dx,UY-dh/2,dw,dh);
 }
 function drawTarget(){
-  const hw=TW/2, hh=TH/2, r=12;
+  const r=TR; // 圆形头像半径
   const sk=Math.round(colShake*(Math.random()>.5?1:-1));
-  const sky=Math.round(colShake*(Math.random()>.5?.4:-.4));
+  const sky=Math.round(colShake*(Math.random()>.5?.35:-.35));
   ctx.save(); ctx.translate(TX+sk, TY+sky);
-  // 卡片阴影 + 白边
-  ctx.shadowColor=charProg>0?`rgba(255,${Math.floor(80-charProg*60)},0,.7)`:'rgba(180,100,160,.25)';
-  ctx.shadowBlur=12+charProg*20;
-  ctx.fillStyle=charProg>.3?`rgb(${Math.floor(60+charProg*60)},${Math.floor(20-charProg*15)},0)`:'#fff';
-  // 白边圆角矩形
-  ctx.beginPath();ctx.roundRect(-hw-5,-hh-5,TW+10,TH+10,r+4);ctx.fill();
-  ctx.shadowBlur=0;
-  // 截图内容
+  // 外圈光晕
+  ctx.shadowColor=charProg>0?`rgba(255,${Math.floor(80-charProg*70)},0,.8)`:'rgba(200,100,180,.35)';
+  ctx.shadowBlur=14+charProg*22;
+  // 白圈边框
+  ctx.beginPath(); ctx.arc(0,0,r+6,0,Math.PI*2);
+  ctx.fillStyle=charProg>.3?`rgb(${Math.floor(60+charProg*70)},${Math.floor(15-charProg*12)},0)`:'#fff';
+  ctx.fill(); ctx.shadowBlur=0;
+  // 彩色外圈
+  ctx.beginPath(); ctx.arc(0,0,r+3,0,Math.PI*2);
+  ctx.strokeStyle='rgba(200,140,220,.5)'; ctx.lineWidth=3; ctx.stroke();
+  // 圆形头像
   ctx.save();
-  ctx.beginPath();ctx.roundRect(-hw,-hh,TW,TH,r);ctx.clip();
+  ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.clip();
   if(colleagueImg&&colleagueImg.complete&&colleagueImg.naturalWidth){
-    ctx.drawImage(colleagueImg,-hw,-hh,TW,TH);
+    ctx.drawImage(colleagueImg,-r,-r,r*2,r*2);
   } else {
-    ctx.fillStyle='#f0e8f8';ctx.fillRect(-hw,-hh,TW,TH);
-    ctx.font='32px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('😤',0,0);
+    ctx.fillStyle='#f0e8f8'; ctx.fillRect(-r,-r,r*2,r*2);
+    ctx.font=`${r}px serif`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('😤',0,0);
   }
   // 炸糊效果
   if(charProg>0){
-    ctx.globalAlpha=Math.min(charProg*1.1,.9);ctx.fillStyle='#1a0500';ctx.fillRect(-hw,-hh,TW,TH);
+    ctx.globalAlpha=Math.min(charProg*1.15,.92); ctx.fillStyle='#1a0400'; ctx.fillRect(-r,-r,r*2,r*2);
     if(charProg<.7){
-      ctx.globalAlpha=(1-charProg/.7)*.55;
-      const g=ctx.createRadialGradient(0,0,0,0,0,Math.max(TW,TH)*.7);
-      g.addColorStop(0,'rgba(255,120,0,.9)');g.addColorStop(1,'rgba(200,0,0,0)');
-      ctx.fillStyle=g;ctx.fillRect(-hw*1.3,-hh*1.3,TW*1.6,TH*1.6);
+      ctx.globalAlpha=(1-charProg/.7)*.6;
+      const g=ctx.createRadialGradient(0,0,0,0,0,r*1.15);
+      g.addColorStop(0,'rgba(255,130,0,.9)'); g.addColorStop(1,'rgba(220,0,0,0)');
+      ctx.fillStyle=g; ctx.fillRect(-r*1.3,-r*1.3,r*2.6,r*2.6);
     }
   }
-  ctx.restore();
-  ctx.restore();
+  ctx.restore(); ctx.restore();
 }
 function draw(){
   ctx.clearRect(0,0,W,H);
@@ -423,19 +436,19 @@ function draw(){
   if(poopVisible&&OC.poop){
     const bx=W*.48,by=H*.56+Math.sin(tick*.12)*7,rot=Math.sin(tick*.08)*.14;
     ctx.save();ctx.translate(bx,by);ctx.rotate(rot);
-    const pw=98,ph=OC.poop.height/OC.poop.width*98;
+    const pw=120,ph=OC.poop.height/OC.poop.width*120;
     ctx.drawImage(OC.poop,-pw/2,-ph/2,pw,ph);ctx.restore();
     ctx.save();ctx.strokeStyle=`rgba(232,120,154,${.4+Math.sin(tick*.08)*.3})`;
     ctx.lineWidth=2;ctx.setLineDash([5,4]);
-    ctx.beginPath();ctx.arc(bx,by,72,0,Math.PI*2);ctx.stroke();ctx.restore();
+    ctx.beginPath();ctx.arc(bx,by,82,0,Math.PI*2);ctx.stroke();ctx.restore();
     if(tick%18<9){ctx.save();ctx.font='bold 12px PingFang SC,sans-serif';
-      ctx.textAlign='center';ctx.fillStyle='#E8789A';ctx.fillText('👆 点我！',bx,by+88);ctx.restore();}
+      ctx.textAlign='center';ctx.fillStyle='#E8789A';ctx.fillText('👆 点我！',bx,by+100);ctx.restore();}
   }
   projectiles.forEach(p=>{
     if(p.done)return;
     const tt=Math.min(p.t,1),px=bz(p.sx,p.cpX,p.tx,tt),py=bz(p.sy,p.cpY,p.ty,tt);
     ctx.save();ctx.translate(px,py);ctx.rotate(p.rot);
-    if(OC.poop){const s=48,ph2=OC.poop.height/OC.poop.width*s;ctx.drawImage(OC.poop,-s/2,-ph2/2,s,ph2);}
+    if(OC.poop){const s=56,ph2=OC.poop.height/OC.poop.width*s;ctx.drawImage(OC.poop,-s/2,-ph2/2,s,ph2);}
     ctx.restore();
   });
   particles.forEach(p=>{
@@ -452,12 +465,12 @@ function draw(){
     if(f.bold){ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=3;ctx.strokeText(f.text,0,0);}
     ctx.fillStyle=f.col;ctx.fillText(f.text,0,0);ctx.restore();
   });
-  if(phase==='intro'){const a=Math.max(0,1-tick/50);ctx.fillStyle=`rgba(255,245,250,${a})`;ctx.fillRect(0,0,W,H);}
+
 }
 
 // ═══ 报告（盲盒抽卡） ═══
 const CARDS = {"tier1": [{"rarity": "SSR", "prob": 0.2, "img": "card_ssr1", "tag": "C·N·M·D", "rank": "【祖安判官·赛博正义使者】", "comment": "伴随一声响彻云霄的优美方言，你化身正义使者重拳出击！丢便便的力道之大，直接把伪人钉在了耻辱柱上。别惹你，你现在拥有随时掀桌子的超能力。", "rage": "8888", "purity": "99.9"}, {"rarity": "SR", "prob": 0.8, "img": "card_sr1", "tag": "B·O·O·M", "rank": "【加特林式·物理净化尊者】", "comment": "你的手速让枪管都红温了！15发便便犹如加特林扫射，伪人连走马灯都没来得及看就灰飞烟灭了。这已经不是制裁，是单方面的降维打击！", "rage": "9999", "purity": "99.9"}], "tier2": [{"rarity": "SSR", "prob": 0.2, "img": "card_ssr2", "tag": "S·S·D·D", "rank": "【间歇发疯·精神状态领先】", "comment": "滴滴滴！你的发疯计时器已爆表！在这个草台班子一样的世界里，你选择了最直接的沟通方式——狂丢便便。经鉴定，你的精神状态非常美丽。", "rage": "888", "purity": "88.8"}, {"rarity": "SR", "prob": 0.8, "img": "card_sr2", "tag": "Y·Y·G·Q", "rank": "【国际手势·极致嘲讽大师】", "comment": "不紧不慢，伤害却极高。你丢出的每一坨便便都精准附带精神暴击，物理与魔法双重输出。主打\"我就喜欢看你看不惯我又干不掉我的样子\"，优雅。", "rage": "666", "purity": "77.7"}], "tier3": [{"rarity": "UR", "prob": 0.1, "img": "card_ur3", "tag": "A·M·T·F", "rank": "【大慈大悲·功德圆满真君】", "comment": "你的动作慢条斯理，丢便便仿佛在给伪人抛洒圣水。你早已超脱了世俗的怨气，这15下点击不是为了制裁，而是为了超度对方的灵魂。善哉善哉。", "rage": "1", "purity": "100"}, {"rarity": "R", "prob": 0.9, "img": "card_r3", "tag": "L·M·L·A", "rank": "【纯度极高·班味入骨散仙】", "comment": "你甚至连发怒的力气都没有了，只能靠着最后的肌肉记忆，机械地、缓慢地丢着便便。伪人算什么？你现在只想长眠于被窝之中。", "rage": "0", "purity": "66.6"}]};
-const QUOTES = ["素质不详，遇强则强。再惹我，就把你做成化肥！🔥", "虽然我改变不了世界，但我可以改变你的头像（物理意义上）。", "每天叫醒我的不是梦想，而是对这个世界无穷无尽的无语。🚬", "敲电子木鱼，见机甲佛祖，扔赛博便便，修无量功德。🙏", "放下个人素质，享受缺德人生。今日份的杀生已由本系统代劳。", "忍一时卵巢囊肿，退一步乳腺增生。施主，物理超度吧。", "佛不渡傻子，但我乌萨奇可以。阿弥陀佛，善哉善哉。"];
+const QUOTES = ["慢工出烂活，欲速则一坨。", "人不要老是和别人比，比弊时我们会感到自卑。", "后天的努力真的很重要，所以今天和明天休息。", "机关算尽全算错了，出淤泥而抹全身。", "以柔克刚，以巧克力，以德克士。", "想我了就给我打电话，不要怕打扰我，我会开静音和飞行。", "富贵我就淫，贫贱我就移，威武我就屈。", "我以为老天睁一只眼闭一只眼是在装看不见，原来是在架狙。", "有时候我也想一了百了，但是我了不起。", "我的情绪：稳定；我的手段：不详。", "放下个人素质，享受缺德人生。", "伪人只是路过，我才是永恒的工伤。", "没有困难的工作，只有勇敢的牛马。", "优雅，永不过时；发疯，随时待命。"];
 const RARITY_COLOR = {UR:'#FF9500',SSR:'#9B3DFF',SR:'#2979FF',R:'#888888'};
 const RARITY_CLASS = {UR:'badge-ur',SSR:'badge-ssr',SR:'badge-sr',R:'badge-r'};
 const RARITY_PILL_BG = {UR:'#FFF3D0',SSR:'#F3E8FF',SR:'#E8F0FF',R:'#F0F0F0'};
@@ -526,6 +539,227 @@ function shareRpt(){
     text:`[${rarity}] ${rank}\n制裁耗时${time}秒！来测测你的职场战斗力！`}).catch(()=>{});}
   else{alert(`📸 截图发给朋友！\n[${rarity}] ${rank}`);}
 }
+
+// ── 可修改分享链接 ──
+const SHARE_URL = 'https://yayun8064-ui.github.io/usagi-judger/';
+
+// 海报条纹
+function pStripe(ctx, x, y, w, h) {
+  const S = 18;
+  ctx.save();
+  ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+  for (let i = x - h; i < x + w + h; i += S) {
+    ctx.fillStyle = '#ffd700';
+    ctx.beginPath();
+    ctx.moveTo(i, y); ctx.lineTo(i+S/2, y);
+    ctx.lineTo(i+S/2+h, y+h); ctx.lineTo(i+h, y+h);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#222';
+    ctx.beginPath();
+    ctx.moveTo(i+S/2, y); ctx.lineTo(i+S, y);
+    ctx.lineTo(i+S+h, y+h); ctx.lineTo(i+S/2+h, y+h);
+    ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
+}
+
+// 圆角矩形
+function pRR(ctx, x, y, w, h, r, fill, stroke) {
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.arcTo(x+w,y,x+w,y+r,r);
+  ctx.lineTo(x+w,y+h-r); ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h); ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r); ctx.arcTo(x,y,x+r,y,r); ctx.closePath();
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}
+}
+
+// 自动换行文字
+function pText(ctx, text, x, y, maxW, lineH) {
+  const words = text.split(''); // 中文按字符
+  let line = '', lines = [];
+  for(const ch of words) {
+    const test = line + ch;
+    if(ctx.measureText(test).width > maxW && line !== '') {
+      lines.push(line); line = ch;
+    } else { line = test; }
+  }
+  if(line) lines.push(line);
+  lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineH));
+  return lines.length;
+}
+
+async function generatePoster() {
+  const PW = 500, PH = 860;
+  const oc = document.createElement('canvas');
+  oc.width = PW; oc.height = PH;
+  const ctx = oc.getContext('2d');
+
+  // 背景
+  const bg = ctx.createLinearGradient(0, 0, PW, PH);
+  bg.addColorStop(0, '#EDE8FF'); bg.addColorStop(1, '#FFE8F4');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, PW, PH);
+
+  // 顶部警示条
+  pStripe(ctx, 0, 0, PW, 26);
+
+  // App 标题
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = 'bold 26px PingFang SC, sans-serif';
+  ctx.fillStyle = '#4A3848';
+  ctx.fillText('💩 乌萨奇伪人制裁系统', PW/2, 56);
+  ctx.font = '15px PingFang SC, sans-serif';
+  ctx.fillStyle = '#9A80B8';
+  ctx.fillText('优雅，永不过时。发疯，随时待命。', PW/2, 82);
+
+  // 白卡
+  ctx.shadowColor = 'rgba(100,60,200,.12)'; ctx.shadowBlur = 18;
+  pRR(ctx, 20, 100, PW-40, 600, 20, '#fff', null);
+  ctx.shadowBlur = 0;
+
+  // 称号
+  ctx.font = 'bold 22px PingFang SC, sans-serif';
+  ctx.fillStyle = '#2A1A4A'; ctx.textAlign = 'center';
+  const rankEl = document.getElementById('rpt-rank');
+  const rank = rankEl ? rankEl.textContent : '【称号】';
+  ctx.fillText(rank, PW/2, 144);
+
+  // 类型标签
+  const tagEl = document.getElementById('rpt-tag');
+  const tag = tagEl ? tagEl.textContent : 'USAGI';
+  const tagColor = tagEl ? tagEl.style.background : '#888';
+  const tagW = ctx.measureText(tag).width + 32;
+  pRR(ctx, PW/2 - tagW/2, 158, tagW, 30, 15, tagColor, null);
+  ctx.font = 'bold 14px PingFang SC, sans-serif';
+  ctx.fillStyle = '#fff'; ctx.fillText(tag, PW/2, 173);
+
+  // 角色大图
+  const cardImg = document.getElementById('rpt-card-img');
+  if(cardImg && cardImg.naturalWidth) {
+    const iSize = 180;
+    pRR(ctx, PW/2-iSize/2-4, 198, iSize+8, iSize+8, 18, '#f5f0ff', null);
+    ctx.save();
+    ctx.beginPath(); ctx.roundRect(PW/2-iSize/2, 202, iSize, iSize, 14); ctx.clip();
+    ctx.drawImage(cardImg, PW/2-iSize/2, 202, iSize, iSize);
+    ctx.restore();
+    // 稀有度角标
+    const badgeEl = document.getElementById('rpt-rarity-badge');
+    const rarity = badgeEl ? badgeEl.textContent : 'SR';
+    const badgeColors = {UR:'#FF9500',SSR:'#9B3DFF',SR:'#2979FF',R:'#888'};
+    const bc = badgeColors[rarity]||'#888';
+    pRR(ctx, PW/2+iSize/2-38, 192, 46, 24, 12, bc, null);
+    ctx.font = 'bold 13px PingFang SC, sans-serif';
+    ctx.fillStyle = '#fff'; ctx.fillText(rarity, PW/2+iSize/2-15, 204);
+  }
+
+  // 金句
+  const quoteEl = document.getElementById('rpt-quote');
+  const quote = quoteEl ? quoteEl.textContent : '';
+  pRR(ctx, 34, 394, PW-68, 70, 10, '#F5F0FF', null);
+  ctx.font = '14px PingFang SC, sans-serif';
+  ctx.fillStyle = '#5A3868'; ctx.textAlign = 'left';
+  pText(ctx, '"' + quote + '"', 50, 415, PW-100, 22);
+
+  // 数据条
+  const stats = [
+    {label:'净化值', val: document.getElementById('rpt-purity-val')?.textContent||'99.9%', w:1},
+    {label:'消耗便便', val:'15 枚', w:1},
+    {label:'怒气值', val: (document.getElementById('rpt-rage-val')?.textContent||'---')+'%', w:0.6},
+  ];
+  let sy = 480;
+  ctx.font = '13px PingFang SC, sans-serif';
+  stats.forEach(s => {
+    ctx.fillStyle = '#8A7898'; ctx.textAlign = 'left';
+    ctx.fillText(s.label, 36, sy);
+    pRR(ctx, 100, sy-11, 290, 12, 6, '#EDE0F0', null);
+    const grd = ctx.createLinearGradient(100, 0, 100+290*s.w, 0);
+    grd.addColorStop(0,'#B8EFE4'); grd.addColorStop(1,'#E8789A');
+    pRR(ctx, 100, sy-11, 290*s.w, 12, 6, grd, null);
+    ctx.fillStyle = '#4A3848'; ctx.textAlign = 'right';
+    ctx.fillText(s.val, 460, sy);
+    sy += 30;
+  });
+
+  // 指标 pill
+  const timeEl = document.getElementById('rpt-time');
+  const rageEl = document.getElementById('rpt-rage-pill');
+  const rarityEl = document.getElementById('rpt-rarity-text');
+  const pillText = `${rarityEl?.textContent||'SR'} · 耗时 ${timeEl?.textContent||'-.-'}s · 怒气 ${rageEl?.textContent||'---'}%`;
+  ctx.font = 'bold 13px PingFang SC, sans-serif';
+  ctx.textAlign = 'center';
+  const pillW = Math.min(ctx.measureText(pillText).width + 40, PW-80);
+  pRR(ctx, PW/2-pillW/2, 580, pillW, 28, 14, '#F0EEFF', null);
+  ctx.fillStyle = '#7050B8'; ctx.fillText(pillText, PW/2, 594);
+
+  // 分割线
+  ctx.strokeStyle = 'rgba(200,160,220,.3)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(36, 624); ctx.lineTo(PW-36, 624); ctx.stroke();
+
+  // QR 码区
+  const qrSize = 110;
+  ctx.font = 'bold 14px PingFang SC, sans-serif';
+  ctx.fillStyle = '#4A3848'; ctx.textAlign = 'left';
+  ctx.fillText('扫码测你的精神状态', 36, 650);
+  ctx.font = '11px PingFang SC, sans-serif';
+  ctx.fillStyle = '#9A80B8';
+  ctx.fillText(SHARE_URL, 36, 670);
+
+  // 加载 QR 图片
+  await new Promise(res => {
+    const qrImg = new Image();
+    qrImg.crossOrigin = 'anonymous';
+    qrImg.onload = () => {
+      pRR(ctx, PW-qrSize-28, 630, qrSize+8, qrSize+8, 10, '#fff', '#E0D0F0');
+      ctx.drawImage(qrImg, PW-qrSize-24, 634, qrSize, qrSize);
+      res();
+    };
+    qrImg.onerror = res; // 失败就跳过
+    qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size='+qrSize+'x'+qrSize+'&data='+encodeURIComponent(SHARE_URL)+'&color=4A3848';
+  });
+
+  // 底部警示条
+  pStripe(ctx, 0, PH-26, PW, 26);
+
+  return oc;
+}
+
+async function shareRpt() {
+  const rank = document.getElementById('rpt-rank')?.textContent || '伪人制裁报告';
+  const rarity = document.getElementById('rpt-rarity-badge')?.textContent || 'SR';
+  const time = document.getElementById('rpt-time')?.textContent || '-.-';
+
+  // 生成海报
+  let posterCanvas;
+  try { posterCanvas = await generatePoster(); } catch(e) {}
+
+  if(posterCanvas) {
+    posterCanvas.toBlob(async blob => {
+      const file = new File([blob], '伪人制裁报告.png', {type:'image/png'});
+      // 尝试原生分享（含图片）
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})) {
+        try {
+          await navigator.share({files:[file], title:'精神状态确诊报告',
+            text:`[${rarity}] ${rank}\n耗时${time}秒！来测测你的职场战斗力！`});
+          return;
+        } catch(e){}
+      }
+      // 降级：下载海报
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '伪人制裁报告.png';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }, 'image/png');
+  } else {
+    // 无 canvas：文字分享或提示
+    if(navigator.share) {
+      navigator.share({title:'精神状态确诊报告',
+        text:`[${rarity}] ${rank}\n耗时${time}秒！`}).catch(()=>{});
+    } else {
+      alert('📸 截图发给朋友！\n['+rarity+'] '+rank);
+    }
+  }
+}
+
 function restart(){
   imgData=null;avatarOC=null;poopCount=0;clickTs=[];gameDone=false;charProg=0;
   document.getElementById('file-inp').value='';
